@@ -1,0 +1,63 @@
+<html>
+    <h1>
+        <centre> Exam Details </centre>
+    </h1>
+   
+    <%
+      let total = phys+chem+mat
+      let per = total*100/300
+      let result = ""
+      if (per>=50){
+        result="You have PASSED"
+      }else{
+        result="You have FAILED"
+      }
+    %>
+    
+    <style>    
+          table, td, tr{
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        </style>
+    <table>
+        <tr>
+            <td>Student's Name</td>
+            <td><%= sname %></td>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td><%= phys %></td>
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td><%= chem %></td>
+        </tr>        
+        <tr>
+            <td>Maths</td>
+            <td><%= mat %></td>
+        </tr>
+        <tr>
+            <td>Total marks</td>
+            <td><%= total %></td>
+        </tr>
+        <tr>
+            <td>Percentage</td>
+            <td><%= per %></td>
+        </tr>
+        <tr>
+            <td>Result</td>
+            <td><%= result %></td>
+        </tr>
+    <% if (per>50){ %>
+        <tr bgcolor="green">
+            <td>Result2</td>
+            <td><b>You have PASSED</b></td>
+        </tr>
+    <% }else{ %>
+        <tr bgcolor="red">
+            <td>Result2</td>
+            <td><b>You have FAILED</b></td>
+    <% } %>
+    </table>
+</html>
