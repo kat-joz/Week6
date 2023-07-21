@@ -11,6 +11,26 @@ let db = mysql.createConnection({
 
 db.connect();
 
+server.get("/", function(req,res){
+    res.render("homepage.ejs");
+    res.end()
+})
+
+server.get("/allemployees", function(req,res){
+    db.query("select * from employees", function(err, data){
+    res.render("employeelist.ejs", {employees:data});
+    res.end()
+   })
+})
+
+server.get("/departments", function(req,res){
+    db.query("select distinct department from employees", function(err, data){
+    res.render("departments.ejs", {deptName:data});
+    res.end()
+    })
+})
+
+
 server.get("/show", function(req,res){
     db.query("select * from employees", function(err,data){
         console.log(data)
