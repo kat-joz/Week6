@@ -23,6 +23,14 @@ server.get("/allemployees", function(req,res){
    })
 })
 
+server.get("/departmentEmployees/:dept", function(req,res){
+    let sql = "select * from employees where department='"+req.params.dept+"'"
+    db.query(sql, function(err, data){
+    res.render("employeelist.ejs", {employees:data});
+    res.end()
+   })
+})
+
 server.get("/departments", function(req,res){
     db.query("select distinct department from employees", function(err, data){
     res.render("departments.ejs", {deptName:data});
@@ -30,6 +38,16 @@ server.get("/departments", function(req,res){
     })
 })
 
+server.get("/deleteEmployee/:empno", function(req,res){
+    let deleteSQL="delete from employees where empno="+req.params.empno
+    db.query(deleteSQL,function(err, data){
+
+        db.query("select * from employees",function(err, data){
+            res.render("employeelist.ejs",{employees:data})
+            res.end()
+        })
+    })
+})
 
 server.get("/show", function(req,res){
     db.query("select * from employees", function(err,data){
